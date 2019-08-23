@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import { ListView, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { connectStyle } from "native-base-shoutem-theme";
 
 import { SwipeRow } from "./SwipeRow";
@@ -26,7 +26,7 @@ class List extends Component {
     this.openCellId = null;
     if (props.dataArray && props.renderRow) {
       let rowHasChanged = props.rowHasChanged || ((r1, r2) => r1 !== r2);
-      const ds = new ListView.DataSource({ rowHasChanged: rowHasChanged });
+      const ds = new FlatList.DataSource({ rowHasChanged: rowHasChanged });
       this.state = {
         dataSource: ds.cloneWithRows(props.dataArray)
       };
@@ -177,7 +177,7 @@ class List extends Component {
   render() {
     if (this.props.renderLeftHiddenRow || this.props.renderRightHiddenRow) {
       return (
-        <ListView
+        <FlatList
           {...this.props}
           ref={ref => {
             this.setRefs(ref);
@@ -192,7 +192,7 @@ class List extends Component {
       );
     } else if (this.state.dataSource) {
       return (
-        <ListView
+        <FlatList
           {...this.props}
           ref={ref => (this._root = ref)}
           enableEmptySections
